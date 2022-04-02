@@ -1,0 +1,30 @@
+﻿@using OgrenciBilgiIstemi.Models;
+@model List<Table_OKUL>
+@{
+    ViewBag.Title = "Schools";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Okullar</h2>
+<br />
+<table class="table table-bordered" id="tbluyeler">
+    <thead>
+        <tr style="background-color:#31353d;">
+            <th>Okul ID</th>
+            <th>Okul Adı</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody id="partial-post">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.OKULADI</td>
+                <td><a class="btn btn-danger" href="/Home/Schooldelete/@item.ID">Sil</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

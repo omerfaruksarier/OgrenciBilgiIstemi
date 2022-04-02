@@ -1,0 +1,116 @@
+﻿@using OgrenciBilgiIstemi.Models;
+@model List<Table_OGRENCI>
+@{
+    ViewBag.Title = "Student";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Öğrenciler</h2>
+
+<br />
+
+
+<form id="tfnewsearch">
+    <table>
+        <tr>
+            <td>
+                <input type="text" id="txtSearch" class="tftextinput2" size="21" maxlength="120"
+                       placeholder="öğrenci, numara veya tc ara..." autocomplete="off">
+                <input class="tftextinput5" name="kdf" hidden />
+                <input class="tftextinput6" name="val" hidden />
+            </td>
+        </tr>
+        <tr style="background-color:white; position:absolute;">
+            <td style="position:relative; z-index:3; background:white;box-shadow: 0px 0px 6px 0px rgba(0,0,0,.15); width:350px;">
+                <div class="divResult" id="searchDiv"></div>
+            </td>
+        </tr>
+    </table>
+</form>
+
+
+
+<table class="table table-bordered" id="tbluyeler">
+    <thead>
+        <tr style="background-color:#31353d;">
+            <th>Üye ID</th>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>TC</th>
+            <th>Sınıf</th>
+            <th>Sil</th>
+            <th>Bilgileri</th>
+
+
+        </tr>
+    </thead>
+    <tbody id="partial-post">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.AD</td>
+                <td>@item.SOYAD</td>
+                <td>@item.TC</td>
+                <td>@item.Table_SINIF.SINIF</td>
+                <td><a class="btn btn-danger" href="/Home/Studentdelete/@item.ID">Sil</a></td>
+                <td><a class="btn btn-success" href="/Home/Studentinfo/@item.ID">Bilgileri</a></td>
+            </tr>
+
+        }
+        
+    </tbody>
+</table>
+
+<script>
+
+    $(document).ready(function () {
+        var searchboxID = "#txtSearch";
+        $('#srcButton').click(function () {
+            $(searchboxID).keyup();
+        });
+        $(searchboxID).keyup(function (event) {
+            if (event.keyCode != 13 && event.keyCode != 37 && event.keyCode != 39) {
+                if ($.trim($(searchboxID).val()).length > 0) {
+                    delay(function () {
+
+                        var options = {};
+                        options.url = '/Home/StudentSearch',
+                            options.type = "POST";
+                        options.data = "{searchKey:'" + $(searchboxID).val() + "'}",
+                            options.contentType = "application/json; charset=utf-8",
+                            options.success = function (result) {
+                                $("#searchDiv").html(result);
+                                $("#searchDiv").show();
+
+                            };
+                        options.error = function (err) {
+                            if (err.status == 500) {
+
+                                //window.location.href = "/Home/Index";
+                                alert("Hata");
+                            } else {
+                                if (err.status != 0) {
+
+                                    alert(err.statusText);
+                                }
+                            }
+                        };
+                        $.ajax(options);
+                    }, 500);
+                } else {
+                    $("#searchDiv").hide();
+                }
+            }
+        });
+    });
+
+    var delay = (function () {
+        var timer = 0;
+        return function (callback, ms) {
+            clearTimeout(timer);
+            timer = setTimeout(callback, ms);
+        };
+    })();
+</script>

@@ -1,0 +1,31 @@
+﻿@using OgrenciBilgiIstemi.Models;
+@model List<Table_SINIF>
+@{
+    ViewBag.Title = "Classes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sınıflar</h2>
+<br />
+
+
+<table class="table table-bordered" id="tbluyeler">
+    <thead>
+        <tr style="background-color:#31353d;">
+            <th>Sınıf ID</th>
+            <th>Sınıf</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody id="partial-post">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.SINIF<span>. sınıf</span></td>
+                <td><a class="btn btn-danger" href="/Home/Classdelete/@item.ID">Sil</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+

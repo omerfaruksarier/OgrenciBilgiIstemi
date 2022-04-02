@@ -1,0 +1,27 @@
+﻿@model OgrenciBilgiIstemi.Models.Table_OKUL
+@{
+    ViewBag.Title = "Addschool";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Okul Ekle</h2>
+<br />
+@using (Html.BeginForm("Addschool", "Home", FormMethod.Post))
+{
+    <div></div>
+    <div style="margin-top:15px;">
+        <label>Okul Adı</label>
+        @Html.TextBoxFor(x => x.OKULADI, new { @class = "form-control", @required = "required"})
+    </div>
+    <div style="margin-top:15px;">
+        <button class="btn btn-info">Kaydet</button>
+    </div>
+    <br />
+}
+
+@if (ViewBag.hata != null)
+{
+    <script>
+                    alert("Bu okul zaten var!");
+    </script>
+}

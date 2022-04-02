@@ -1,0 +1,17 @@
+﻿@model OgrenciBilgiIstemi.App_Start.studentSearch
+
+@foreach (var item in Model.OgrenciList)
+{
+    <div class="item-content" style="display:flex;" onclick="window.location.href='/Home/Studentinfo/'+@item.ID">
+        <div class="item-info-content" style="flex:1;padding:0 5px">
+            <div class="post-search-name" style="font-weight:600;">@item.AD <span>@item.SOYAD</span></div>
+            <div class="item-info item-owner" style="font-size:12px; color:#65676b;">
+             <span>Numara:</span>   @item.NUMARA
+            </div>
+            <div class="item-info item-type" style="font-size:12px; color:#65676b;">
+                <span>Tc:</span> @item.TC
+            </div>
+        </div>
+    </div>
+}
+

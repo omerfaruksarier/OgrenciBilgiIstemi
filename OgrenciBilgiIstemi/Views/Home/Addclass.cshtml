@@ -1,0 +1,28 @@
+﻿@model OgrenciBilgiIstemi.Models.Table_SINIF
+
+@{
+    ViewBag.Title = "Addclass";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sınıf Ekle</h2>
+<br />
+@using (Html.BeginForm("Addclass", "Home", FormMethod.Post))
+{
+    <div></div>
+    <div style="margin-top:15px;">
+        <label>Sınıf</label>
+        @Html.TextBoxFor(x => x.SINIF, new { @class = "form-control", @required = "required", @type="number" })
+    </div>
+    <div style="margin-top:15px;">
+        <button class="btn btn-info">Kaydet</button>
+    </div>
+    <br />
+}
+
+@if(ViewBag.hata != null)
+            {
+                <script>
+                    alert("Bu sınıf zaten var!");
+                </script>
+            }

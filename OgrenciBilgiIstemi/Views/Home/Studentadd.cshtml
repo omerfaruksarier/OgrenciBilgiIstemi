@@ -1,0 +1,52 @@
+﻿@model OgrenciBilgiIstemi.Models.Table_OGRENCI
+@{
+    List<OgrenciBilgiIstemi.Models.Table_OKUL> _deger = ViewData["getokul"] as List<OgrenciBilgiIstemi.Models.Table_OKUL>;
+    List<OgrenciBilgiIstemi.Models.Table_SINIF> _deger2 = ViewData["getsınıf"] as List<OgrenciBilgiIstemi.Models.Table_SINIF>;
+    ViewBag.Title = "Studentadd";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Öğrenci Ekle</h2>
+@using (Html.BeginForm("Studentadd", "Home", FormMethod.Post))
+{
+    <div></div>
+    <div style="margin-top:15px;">
+        <label>Öğrenci Adı</label>
+        @Html.TextBoxFor(x => x.AD, new { @class = "form-control", @required = "required" })
+    </div>
+    <div style="margin-top:15px;">
+        <label>Öğrenci Soyadı</label>
+        @Html.TextBoxFor(x => x.SOYAD, new { @class = "form-control", @required = "required" })
+    </div>
+    <div style="margin-top:15px;">
+        <label>Öğrenci Numarası</label>
+        @Html.TextBoxFor(x => x.NUMARA, new { @class = "form-control", @required = "required" })
+    </div>
+    <div style="margin-top:15px;">
+        <label>Öğrenci Tc</label>
+        @Html.TextBoxFor(x => x.TC, new { @class = "form-control", @required = "required" })
+    </div>
+    <div style="margin-top:15px;">
+        <label>Öğrenci Okulu</label>
+        <select class="form-control" name="OKUL">
+            @foreach (var item in _deger)
+            {
+                    <option value="@item.ID">@item.OKULADI</option>
+            }
+        </select>
+    </div>
+    <div style="margin-top:15px;">
+        <label>Öğrenci Sınıfı</label>
+        <select class="form-control" name="SINIFI">
+            @foreach (var item in _deger2)
+            {
+                    <option value="@item.ID">@item.SINIF</option>
+            }
+        </select>
+    </div>
+    <div style="margin-top:15px;">
+        <button class="btn btn-info">Kaydet</button>
+    </div>
+    <br />
+}
+
