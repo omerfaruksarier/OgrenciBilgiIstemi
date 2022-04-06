@@ -13,7 +13,7 @@ CSS 3
 Project is: _in progress_
 
 ## Login
-username:admin
-password:123123
+username: admin
+password: 123123
 ## Contact
 Created by Ömer Faruk Sarıer - sarier.omer.faruk@gmail.com
